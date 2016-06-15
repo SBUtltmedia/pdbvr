@@ -1,6 +1,8 @@
 <script>
 
-var exampleSocket = new WebSocket("ws://pdbvr.herokuapp.com", 'echo-protocol');
+
+var HOST = location.origin.replace(/^http/, 'ws')
+var exampleSocket = new WebSocket(HOST, 'echo-protocol');
 
 var clientID;
 exampleSocket.onopen = function (event) {
