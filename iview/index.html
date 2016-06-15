@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" style = "width: 100%; height: 100%">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-store" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="author" content="Hongjian Li">
+  <meta name="description" content="Protein Data Bank [v2] - Molecule Viewer">
+  <title>Protein Data Bank [v2] - Molecule Viewer</title>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <link rel="stylesheet" href="../bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../index.css">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="../apple-touch-icon-57-precomposed.png">
+      <style>
+     img[class*=webvr]{
+     background-color:blue !important;
+     
+     } 
+    #view {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      
+.onepix-imgloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+}
+ 
+/*hide the second element in the loading container (first element is the leading img)*/
+.loading-container > *:not(.onepix-imgloader) {
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    -khtml-opacity:0;
+    opacity:0;
+}
+ 
+.loading-container {
+    position: relative;
+    background: #000000;
+    min-height: 40px;
+    height: 400px;
+}
+ 
+#container {
+    /*min-width: 0px; */
+    min-height: 400px;
+    }      
+    </style>
+
+</head>
+<body style = "padding: 0px; margin: 0px; width: 100%; height:100%;">
+<!-- 
+<div id="debug" style="position:absolute;left:0;top:0;z-index:200000">
+Debug info
+</div>
+ -->
+    <!-- <canvas id="iview" style="padding: 0px; margin: 0px; width: 100%; height: 100%;">Your browser does not support WebGL.</canvas> -->
+      <div id="view" class = "loading-container" style="padding: 0px; margin: 0px; width: 100%; height: 100%;"></div>
+
+     
+     <!-- <div class="row">
+        <div class="col-md-12">
+          <p>Hongjian Li, Kwong-Sak Leung, Takanori Nakane and Man-Hon Wong. iview: an interactive WebGL visualizer for protein-ligand complex. <em>BMC Bioinformatics</em>, 15(1):56, 2014. <a href="http://dx.doi.org/10.1186/1471-2105-15-56">DOI: 10.1186/1471-2105-15-56</a></p>
+        </div>
+      </div>-->
+  <!-- <footer>
+    <div class="container">
+      <p><a href="http://www.cuhk.edu.hk"><img src="../cuhk.jpg" alt="CUHK logo"></a>&copy; 2012-2016 Chinese University of Hong Kong. Platform designed by <a href="http://www.cse.cuhk.edu.hk/~hjli">Hongjian Li</a>. Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.<a href="http://validator.w3.org/check?uri=referer"><img src="../HTML5_Badge_512.png" alt="HTML5 logo"></a></p>
+    </div>
+  </footer> -->
+  <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="http://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script>
+  <script src="../bootstrap.min.js"></script>
+  <script src="three.min.js"></script>
+  <script src="webvr-polyfill.js"></script>
+  <script src="build/webvr-manager.js"></script>
+  <script src="AnaglyphEffect.js"></script>
+  <script src="ParallaxBarrierEffect.js"></script>
+  <script src="OculusRiftEffect.js"></script>
+  <script src="VREffect.js"></script>
+  <script src="VRControls.js"></script>
+  <script src="iview.js"></script>
+  <script src="surface.min.js"></script>
+  <script src="index.js"></script>
+</body>
+</html>
