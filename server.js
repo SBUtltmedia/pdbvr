@@ -1,5 +1,12 @@
-var http = require('http');
-var server = http.createServer(function(request, response) {});
+//var http = require('http');
+//var server = http.createServer(function(request, response) {});
+
+
+const server = express()
+  .use((req, res) => res.sendFile(INDEX) )
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`));
+
+
 var eventEmitter = require('events').EventEmitter;
 
 var custom = new eventEmitter();
@@ -8,9 +15,8 @@ server.listen(port, function() {
     console.log((new Date()) + ' Server is listening on port 1234');
 });
 var WebSocketServer = require('websocket').server;
-wsServer = new WebSocketServer({
-    httpServer: server
-});
+wsServer = new SocketServer(
+    { server });
 
 var count = 0;
 var clients = {};
