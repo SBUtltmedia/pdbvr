@@ -1,120 +1,95 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" style = "width: 100%; height: 100%">
 <head>
   <meta charset="utf-8">
+  <meta http-equiv="Cache-Control" content="no-store" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="author" content="Hongjian Li">
-  <meta name="description" content="istar: a software-as-a-service platform for general-purpose web applications">
-  <title>istar: a software-as-a-service platform for general-purpose web applications</title>
-  <link rel="stylesheet" href="bootstrap.min.css">
-  <link rel="stylesheet" href="index.css">
-  <link rel="shortcut icon" href="favicon.ico">
-  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="apple-touch-icon-144-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="apple-touch-icon-114-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="apple-touch-icon-72-precomposed.png">
-  <link rel="apple-touch-icon-precomposed" href="apple-touch-icon-57-precomposed.png">
-  <script>
-    var _gaq=[['_setAccount','UA-20604862-1'],['_trackPageview']];
-    (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-    g.src=('https:'==location.protocol?'//ssl':'//www')+'.google-analytics.com/ga.js';
-    s.parentNode.insertBefore(g,s)}(document,'script'));
-  </script>
+  <meta name="description" content="Protein Data Bank [v2] - Molecule Viewer">
+  <title>Protein Data Bank [v2] - Molecule Viewer</title>
+  <link rel="stylesheet" href="../bootstrap.min.css">
+  <link rel="stylesheet" href="../bootstrap-theme.min.css">
+  <link rel="stylesheet" href="../index.css">
+  <link rel="shortcut icon" href="../favicon.ico">
+  <link rel="apple-touch-icon-precomposed" sizes="144x144" href="../apple-touch-icon-144-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../apple-touch-icon-114-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" sizes="72x72" href="../apple-touch-icon-72-precomposed.png">
+  <link rel="apple-touch-icon-precomposed" href="../apple-touch-icon-57-precomposed.png">
+      <style>
+     img[class*=webvr]{
+     background-color:blue !important;
+     
+     } 
+    #view {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+      }
+      
+.onepix-imgloader {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 1000;
+}
+ 
+/*hide the second element in the loading container (first element is the leading img)*/
+.loading-container > *:not(.onepix-imgloader) {
+    filter:alpha(opacity=0);
+    -moz-opacity:0;
+    -khtml-opacity:0;
+    opacity:0;
+}
+ 
+.loading-container {
+    position: relative;
+    background: #000000;
+    min-height: 40px;
+    height: 400px;
+}
+ 
+#container {
+    /*min-width: 0px; */
+    min-height: 400px;
+    }      
+    </style>
+
 </head>
-<body>
-  <a class="sr-only" href="#content">Skip navigation</a>
-  <a href="https://github.com/HongjianLi/istar" class="ribbon"></a>
-  <header class="navbar navbar-inverse navbar-static-top">
-    <div class="container">
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-          <span class="icon-bar"></span>
-        </button>
-      </div>
-      <nav class="collapse navbar-collapse">
-        <ul class="nav navbar-nav">
-          <li class="active">
-            <a href="."><img src="logo.png" alt="istar logo">istar: software as a service</a>
-          </li>
-          <li>
-            <a href="idock"><img src="idock/logo.png" alt="idock logo">idock: structure-based virtual screening</a>
-          </li>
-          <li>
-            <a href="usr"><img src="usr/logo.png" alt="idock logo">USR: ligand-based virtual screening</a>
-          </li>
-          <li>
-            <a href="iview"><img src="iview/logo.png" alt="iview logo">iview: interactive WebGL visualizer</a>
-          </li>
-          <li>
-            <a href="igrep"><img src="igrep/logo.png" alt="igrep logo">igrep: DNA sequence matching</a>
-          </li>
-          <li>
-            <a href="icuda"><img src="icuda/logo.png" alt="icuda logo">icuda: introduction to CUDA</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
-  <div class="jumbotron" id="content" role="main">
-    <div class="container">
-      <h1><img src="logo.png" alt="logo" class="logo">istar</h1>
-      <p>a software-as-a-service platform for general-purpose web applications</p>
-    </div>
-  </div>
-  <div class="container">
-    <section>
-      <div class="page-header">
-        <h2>Architecture</h2>
-      </div>
-      <div class="row">
+<body style = "padding: 0px; margin: 0px; width: 100%; height:100%;">
+<!-- 
+<div id="debug" style="position:absolute;left:0;top:0;z-index:200000">
+Debug info
+</div>
+ -->
+    <!-- <canvas id="iview" style="padding: 0px; margin: 0px; width: 100%; height: 100%;">Your browser does not support WebGL.</canvas> -->
+      <div id="view" class = "loading-container" style="padding: 0px; margin: 0px; width: 100%; height: 100%;"></div>
+
+     
+     <!-- <div class="row">
         <div class="col-md-12">
-          <img src="architecture.png" alt="architecture" class="img-responsive">
+          <p>Hongjian Li, Kwong-Sak Leung, Takanori Nakane and Man-Hon Wong. iview: an interactive WebGL visualizer for protein-ligand complex. <em>BMC Bioinformatics</em>, 15(1):56, 2014. <a href="http://dx.doi.org/10.1186/1471-2105-15-56">DOI: 10.1186/1471-2105-15-56</a></p>
         </div>
-      </div>
-    </section>
-    <section>
-      <div class="page-header">
-        <h2>Terms of Use and Privacy Policy</h2>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <p>General use</p>
-          <ul>
-            <li>Services under this site are completely free public services. They run on computers at a public university.</li>
-            <li>We offer no warranty or guarantee about the suitability of any results generated by this facility for any particular purpose.</li>
-            <li>Interpretation of data and results produced by the services under this site is entirely at your own risk.</li>
-            <li>By using this site you agree to all terms and conditions outlined here.</li>
-          </ul>
-          <p>Data submission</p>
-          <ul>
-            <li>By submitting your data, you warrant that you have the right to do so.</li>
-            <li>You indemnify us against any claims arising as a consequence of your submission.</li>
-            <li>Your data may effectively become public as soon as you submit them.</li>
-            <li>We offer no guarantees and accept no liability for disclosure of any files you may submit to our servers.</li>
-            <li>We accept no responsibility for any data submitted to our servers.</li>
-          </ul>
-          <p>Personal identifying information</p>
-          <ul>
-            <li>We may retain your email address for sending you completion notification of your jobs.</li>
-            <li>We may retain your email address for sending you updates and changes on this site.</li>
-            <li>We will not give your email address or any other information about you to anyone, except to government as required by law.</li>
-          </ul>
-          <p>Project data duration</p>
-          <ul>
-            <li>Job results of the services under this site will remain on our servers until storage shortage, but this is entirely at our discretion.</li>
-            <li>We reserve the right to retain data on our servers for illustration or debugging purposes.</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-  </div>
-  <footer>
+      </div>-->
+  <!-- <footer>
     <div class="container">
-      <p><a href="http://www.cuhk.edu.hk"><img src="cuhk.jpg" alt="CUHK logo"></a>&copy; 2012-2016 Chinese University of Hong Kong. Platform designed by <a href="http://www.cse.cuhk.edu.hk/~hjli">Hongjian Li</a>. Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.<a href="http://validator.w3.org/check?uri=referer"><img src="HTML5_Badge_512.png" alt="HTML5 logo"></a></p>
+      <p><a href="http://www.cuhk.edu.hk"><img src="../cuhk.jpg" alt="CUHK logo"></a>&copy; 2012-2016 Chinese University of Hong Kong. Platform designed by <a href="http://www.cse.cuhk.edu.hk/~hjli">Hongjian Li</a>. Code licensed under <a href="http://www.apache.org/licenses/LICENSE-2.0">Apache License 2.0</a>. Documentation licensed under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.<a href="http://validator.w3.org/check?uri=referer"><img src="../HTML5_Badge_512.png" alt="HTML5 logo"></a></p>
     </div>
-  </footer>
+  </footer> -->
   <script src="http://code.jquery.com/jquery-2.2.0.min.js"></script>
-  <script src="bootstrap.min.js"></script>
+  <script src="http://heartcode-canvasloader.googlecode.com/files/heartcode-canvasloader-min-0.9.1.js"></script>
+  <script src="../bootstrap.min.js"></script>
+  <script src="three.min.js"></script>
+  <script src="webvr-polyfill.js"></script>
+  <script src="build/webvr-manager.js"></script>
+  <script src="AnaglyphEffect.js"></script>
+  <script src="ParallaxBarrierEffect.js"></script>
+  <script src="OculusRiftEffect.js"></script>
+  <script src="VREffect.js"></script>
+  <script src="VRControls.js"></script>
+  <script src="iview.js"></script>
+  <script src="surface.min.js"></script>
+  <script src="index.js"></script>
 </body>
 </html>
