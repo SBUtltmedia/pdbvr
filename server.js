@@ -3,7 +3,8 @@ var server = http.createServer(function(request, response) {});
 var eventEmitter = require('events').EventEmitter;
 
 var custom = new eventEmitter();
-server.listen(80, function() {
+var port = process.env.PORT || 3000;
+server.listen(port, function() {
     console.log((new Date()) + ' Server is listening on port 1234');
 });
 var WebSocketServer = require('websocket').server;
