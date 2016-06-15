@@ -1,17 +1,62 @@
-var app = require('express')();
-var http = require('http').Server(app);
-http.on("foo",function(req, res){
+var http = require('http');
+var server = http.createServer(function(request, response) {});
+var eventEmitter = require('events').EventEmitter;
 
-res.send("hey");
+var custom = new eventEmitter();
+server.listen(80, function() {
+    console.log((new Date()) + ' Server is listening on port 1234');
+});
+var WebSocketServer = require('websocket').server;
+wsServer = new WebSocketServer({
+    httpServer: server
 });
 
-//http.emit("foo");
+var count = 0;
+var clients = {};
 
-app.get('/', function(req, res){
-  res.send('<h1>Hello world</h1>');
+wsServer.on('request', function(r){
+   var connection = r.accept('echo-protocol', r.origin);
+   var id = count++;
+	// Store the connection method so we can loop through & contact all clients
+	clients[id] = connection;
+	 console.log((new Date()) + ' Connection accepted [' + id + ']');
+   sendText("id", id, connection, "Hi");
+   
+
+custom.on('dog', function(message)
+{
+	sendText("dog", id, connection, "BARK!");
+}); 
+connection.on('message', function(event) {
+
+  console.log("Received something.");
+  console.log(event);
+  
+  custom.emit('dog', null);
+  
+});
 });
 
-http.listen(80, function(){
-  console.log('listening on *:3000');
-});
-//dfds
+
+
+function sendText(mType, id, connection, mData)
+{
+	var msg = {
+	type: mType,
+	data: mData,
+	id: id,
+	date: Date.now()
+	};
+	
+	connection.send(JSON.stringify(msg));
+}
+
+
+
+
+
+
+
+
+ 
+ 
