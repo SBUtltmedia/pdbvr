@@ -1,0 +1,42 @@
+<script>
+
+var exampleSocket = new WebSocket("ws://129.49.17.170", 'echo-protocol');
+
+var clientID;
+exampleSocket.onopen = function (event) {
+
+
+	exampleSocket.send("A message");
+
+
+//	exampleSocket.emit('custom', "A message");
+}
+
+exampleSocket.onmessage = function(event) 
+{
+	var theStuff = JSON.parse(event.data);
+	console.log(theStuff);
+	
+	switch(theStuff.type)
+	{
+		case "molecule":
+			console.log("ayyy lmao");
+			break;
+		
+		case "props":
+			clientID = theStuff.id;
+			break;
+			
+		case "matrix":
+			console.log(theStuff.text);
+			break;
+	}
+	
+	console.log(clientID);
+}
+
+// exampleSocket.on('dog', function(message)
+// {
+// 	console.log("Bark.");
+// });
+</script>
